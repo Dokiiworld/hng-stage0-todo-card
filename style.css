@@ -1,0 +1,288 @@
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:'Inter', system-ui, sans-serif;
+}
+
+html{
+    visibility:hidden;
+    opacity:0;
+    }
+    
+html.loaded{
+visibility:visible;
+opacity:1;
+transition: opacity 0.5s ease;
+}
+
+
+body{
+    font-family:'Inter', system-ui, sans-serif;
+    background: linear-gradient(135deg,#eef2ff,#f8fafc);
+    padding:40px 20px;
+    display:flex;
+    justify-content:center;
+    font-size: 14px;
+    /* min-height:100vh; */
+}
+
+.todo-card{
+    background:white;
+    width:100%;
+    max-width:450px;
+    padding:24px;
+    border-radius:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    /* transition: all 0.25s ease; */
+    transform: translateY(10px);
+    opacity:0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+html.loaded .todo-card{
+    transform: translateY(0);
+    opacity:1;
+    }
+
+
+
+    .gradient-border {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        }
+        
+        /* TOP + BOTTOM GRADIENT LINES */
+        .gradient-border::before,
+        .gradient-border::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(
+            90deg,
+            #ff4d4d,
+            #f9cb28,
+            #2af598,
+            #009efd,
+            #e040fb,
+            #ff4d4d
+        );
+        background-size: 300% 100%;
+        animation: gradientMove 4s linear infinite;
+        }
+        
+        /* TOP BORDER */
+        .gradient-border::before {
+        top: 0;
+        }
+        
+        /* BOTTOM BORDER */
+        .gradient-border::after {
+        bottom: 0;
+        }
+        
+        /* ANIMATION */
+        @keyframes gradientMove {
+        0% {
+            background-position: 0% 50%;
+        }
+        100% {
+            background-position: 300% 50%;
+        }
+        }
+    
+
+/* Completed state */
+.todo-card.completed{
+    background:#ddfcfa;
+}
+
+.todo-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 30px rgba(0,0,0,0.12);
+    }
+
+.todo-card h2{
+font-size:20px;
+}
+
+.priority{
+font-weight:600;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+    width:fit-content;
+}
+
+.priority.high{
+background:#ffe5e5;
+color:#e63946;
+border: 1px solid #ffcbcb;
+}
+
+.priority.medium{
+    background:#fff4e5;
+    color:#f77f00;
+    border: 1px solid #ffcbcb;
+}
+
+.priority.low{
+    background:#e6f7ee;
+    color:#2a9d8f;
+    border: 1px solid #ffcbcb;
+}
+
+.status{
+font-weight:600;
+color:#555;
+}
+.ptitle{
+    padding-bottom: 4px;
+}
+.due-section{
+font-size:14px;
+color:black;
+background-color: whitesmoke;
+padding: 15px;
+margin-top:4px;
+border-radius: 10px;
+border: 1px solid #e2dfdf;
+display:flex;
+justify-content: space-between;
+align-items: center;
+}
+
+[data-testid="test-todo-time-remaining"]{
+    font-size:12px;
+    font-weight: 500;
+    color: #0788d8
+}
+.due-section time{
+    color: #0788d8;
+}
+.complete-toggle{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.tags{
+display:flex;
+flex-wrap:wrap;
+gap:5px;
+list-style:none;
+color: gray
+}
+
+.tags li{
+    background:#eef1f5;
+    padding:6px 12px;
+    border-radius:10px;
+    border: 1px solid #e2dfdf;
+    font-size:12px;
+    font-weight:500;
+}
+.tag-label{
+    /* padding:4px 0px; */
+    font-size:14px;
+}
+/* .tags div{
+    padding:4px 0px;
+    font-size:14px;
+} */
+
+.todo-card h2{
+    font-size:20px;
+    font-weight:600;
+    color:#1a1a1a;
+    }
+
+.actions{
+display:flex;
+gap:10px;
+margin-top:10px;
+}
+
+
+button{
+    border:none;
+    background:#111;
+    color:white;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:500;
+    transition: all 0.2s ease;
+}
+
+button:hover{
+    background:#333;
+    transform:translateY(-1px);
+}
+
+button:focus{
+outline:2px solid #4c9ffe;
+}
+
+@media (max-width:480px)
+{
+    .todo-card{
+    padding:18px;
+    }
+}
+
+
+.status-wrapper{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    }
+    
+    .status{
+    font-size:13px;
+    font-weight:600;
+    color:#444;
+    }
+    
+    /* progress container */
+    .progress-bar{
+    width:100%;
+    height:6px;
+    background:#eee;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top: 5px;
+    }
+    
+    /* progress indicator */
+    .progress{
+    height:100%;
+    border-radius:20px;
+    transition: width .5s ease, background .3s ease;
+    }
+
+    
+    /* STATUS STATES */
+    
+    .progress.pending{
+    width:25%;
+    background:#f77f00;
+    }
+    
+    .progress.in-progress{
+    width:60%;
+    background:#009efd;
+    }
+    
+    .progress.completed{
+    width:100%;
+    background:#2a9d8f;
+    }
