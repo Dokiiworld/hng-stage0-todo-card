@@ -2,7 +2,7 @@ window.addEventListener("load", () => {
     document.documentElement.classList.add("loaded")
     })
 
-const dueDate = new Date("2026-04-16T18:00:00Z")
+const dueDate = new Date("2026-04-18T18:00:00Z")
 
 const remainingEl =
 document.querySelector('[data-testid="test-todo-time-remaining"]')
