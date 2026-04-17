@@ -21,7 +21,7 @@ transition: opacity 0.5s ease;
 body{
     font-family:'Inter', system-ui, sans-serif;
     background: linear-gradient(135deg,#eef2ff,#f8fafc);
-    padding:40px 20px;
+    padding:40px 10px;
     display:flex;
     justify-content:center;
     font-size: 14px;
@@ -30,6 +30,7 @@ body{
 
 .todo-card{
     background:white;
+    position: relative;
     width:100%;
     max-width:450px;
     padding:24px;
@@ -122,22 +123,55 @@ font-weight:600;
     width:fit-content;
 }
 
-.priority.high{
-background:#ffe5e5;
-color:#e63946;
-border: 1px solid #ffcbcb;
-}
+/* .priority.high{
+    background:#ffe5e5;
+    color:#e63946;
+    border:1px solid #f5b5b5;
+    } */
 
-.priority.medium{
+    .priority.high{
+        background:#ffe5e5;
+        color:#e63946;
+        border:1px solid #f5b5b5;
+        /* animation: priorityPulse 1.8s ease-in-out infinite; */
+        }
+       
+    .todo-card:not(.completed) .priority.high{
+        animation: priorityPulse 1.8s ease-in-out infinite;
+        }
+        @keyframes priorityPulse{
+
+            0%{
+            box-shadow:0 0 0 0 rgba(230,57,70,0.4);
+            }
+            
+            70%{
+            box-shadow:0 0 0 8px rgba(230,57,70,0);
+            }
+            
+            100%{
+            box-shadow:0 0 0 0 rgba(230,57,70,0);
+            }
+            
+            }
+    
+    .priority.medium{
     background:#fff4e5;
     color:#f77f00;
-    border: 1px solid #ffcbcb;
-}
-
-.priority.low{
+    border:1px solid #ffd7a3;
+    }
+    
+    .priority.low{
     background:#e6f7ee;
     color:#2a9d8f;
-    border: 1px solid #ffcbcb;
+    border:1px solid #bde5d5;
+    }
+
+.status-wrap
+{
+    display: flex;
+    justify-content: space-between;
+    align-items:baseline
 }
 
 .status{
@@ -228,6 +262,22 @@ button:hover{
     transform:translateY(-1px);
 }
 
+[data-testid="test-todo-save-button"]
+{
+    background:#095e8f;
+    color:white;
+}
+[data-testid="test-todo-cancel-button"]
+{
+    background:#111;
+    color:white;
+}
+[data-testid="test-todo-delete-button"]
+{
+    background:#ca0b1b;
+    color:white;
+}
+
 button:focus{
 outline:2px solid #4c9ffe;
 }
@@ -286,3 +336,170 @@ outline:2px solid #4c9ffe;
     width:100%;
     background:#2a9d8f;
     }
+
+
+
+/* ---------------------------- */
+/* PRIORITY INDICATOR (Stage 1a) */
+/* ---------------------------- */
+
+.priority-indicator{
+    height:6px;
+    width:100%;
+    border-radius:6px;
+    margin-bottom:8px;
+    }
+    
+    .priority-indicator.high{
+    background:#e63946;
+    }
+    
+    .priority-indicator.medium{
+    background:#f77f00;
+    }
+    
+    .priority-indicator.low{
+    background:#2a9d8f;
+    }
+    
+    #todoDescription p{
+        padding:5px;
+        border: 1px solid #cfcdcd;
+        border-radius: 10px;
+    }
+    
+    /* ---------------------------- */
+    /* OVERDUE INDICATOR */
+    /* ---------------------------- */
+    
+    .overdue-indicator{
+    background:#e63946;
+    color:white;
+    font-size:12px;
+    padding:4px 8px;
+    border-radius:6px;
+    font-weight:600;
+    width:fit-content;
+    }
+    
+    
+    /* ---------------------------- */
+    /* STATUS CONTROL */
+    /* ---------------------------- */
+    
+    [data-testid="test-todo-status-control"]{
+    /* margin-top:6px; */
+    padding:6px;
+    border-radius:6px;
+    border:1px solid #ddd;
+    font-size:13px;   
+    }
+    
+    
+    /* ---------------------------- */
+    /* EDIT FORM */
+    /* ---------------------------- */
+    
+    .edit-form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    margin-top:10px;
+    padding: 30px 12px;
+    background:#fafafa;
+    border-radius:10px;
+    border:1px solid #eee;
+    }
+
+    
+    .edit-form input,
+    .edit-form textarea,
+    .edit-form select{
+    padding:8px;
+    border-radius:6px;
+    border:1px solid #ddd;
+    font-size:13px;
+    font-family:'Inter', system-ui, sans-serif;
+    width: 100%;
+    }
+    
+    .edit-form input,
+    .edit-form select{
+        min-height:45px;
+    }
+    
+    .edit-form textarea{
+    resize:vertical;
+    min-height:100px;
+    }
+    
+    .edit-actions{
+    display:flex;
+    gap:10px;
+    margin-top:8px;
+    }
+  
+    .doubleCol
+    {
+        display:flex;
+        justify-content:space-between;
+        width:100%;
+        gap:10px;
+    }
+        
+    .doubleCol input,
+    .doubleCol select{
+        width:100%;
+        }
+    
+    /* ---------------------------- */
+    /* COLLAPSIBLE DESCRIPTION */
+    /* ---------------------------- */
+    
+    [data-testid="test-todo-collapsible-section"]{
+    max-height:70px;
+    overflow:hidden;
+    transition:max-height .3s ease;
+    }
+    
+    [data-testid="test-todo-collapsible-section"].expanded{
+    max-height:200px;
+    }
+    
+    [data-testid="test-todo-expand-toggle"]{
+    margin-top:-6px;
+    background:#eee;
+    color:#333;
+    font-size:12px;
+    padding:4px 8px;
+    border-radius:6px;
+    }
+    [data-testid="test-todo-expand-toggle"]:hover{
+  
+    /* background:#eee; */
+    color:#eee;
+   
+    }
+    
+    
+    /* ---------------------------- */
+    /* OVERDUE CARD STATE */
+    /* ---------------------------- */
+    
+    .todo-card.overdue{
+    border:2px solid #e63946;
+    background:#fff5f5;
+    }
+
+
+    [data-testid="test-todo-edit-form"]
+    {
+        position: absolute;
+        right:0;
+        bottom: 0;
+        top: 0;
+        left:0;
+        padding:20px;
+        background: rgba(0, 0, 0, 0.37);
+    }
+    
